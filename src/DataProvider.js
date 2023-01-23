@@ -67,15 +67,14 @@ const DataProvider = (props) => {
         // If "studId" is there then edit (update or PUT)
         if(studId){
             // Using axios
-            await axios.put(url + studId, {
-                body:JSON.stringify(studentFormData),
-            }).then(res=>{getAllStudentsTeachersData(); navigate('/students')});           
+            await axios.put(url + studId, studentFormData)
+            .then(res=>{getAllStudentsTeachersData(); navigate('/students')});  
+                      
         }else{
             // If "studId" is not there then create (POST)
             // Using axios
-            await axios.post(url, {
-                body:JSON.stringify(studentFormData),
-            }).then(res=>{getAllStudentsTeachersData(); navigate('/students')});
+            await axios.post(url,studentFormData)
+            .then(res=>{getAllStudentsTeachersData(); navigate('/students')});
 
         }
 
@@ -133,16 +132,14 @@ const DataProvider = (props) => {
         if(teacherId){
             // If "teacherId" is there then edit (update or PUT) teacher
             // Using axios
-            await axios.put(url + teacherId, {
-                body:JSON.stringify(teacherFormData),
-            }).then(res=>{getAllStudentsTeachersData(); navigate('/teachers')});
+            await axios.put(url + teacherId, teacherFormData)
+            .then(res=>{getAllStudentsTeachersData(); navigate('/teachers')});
             
         }else{
             // When "teacherId" is not there then create (POST) teacher
             // Using axios
-            await axios.post(url, {
-                body:JSON.stringify(teacherFormData),
-            }).then(res=>{getAllStudentsTeachersData(); navigate('/teachers')});
+            await axios.post(url, teacherFormData)
+            .then(res=>{getAllStudentsTeachersData(); navigate('/teachers')});
 
         }
     }
@@ -176,9 +173,9 @@ const DataProvider = (props) => {
             .then(async(res)=>{
                 // Making the "teacher" field of these students to "" and updating these students
                 res.data.teacher = "";
-                await axios.put(url+studId,{
-                    body:JSON.stringify(res.data)
-                }).then(dt=>getAllStudentsTeachersData());
+                await axios.put(url+studId, res.data)
+                .then(dt=>getAllStudentsTeachersData());
+
             });
 
         });
